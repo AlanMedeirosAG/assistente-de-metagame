@@ -14,9 +14,41 @@ const markdownToHTML = (text) =>{
 const askToIa = async (question , game, apiKey) => {
     const model = "gemini-2.5-flash"
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
-    const pergunta =  `
+
+    let pergunta = ``
+
+    const perguntaValorant = `
+    ## Especialidade
+    Você é um especialista assistente de meta para o jogo **Valorant**
+
+    ## Tarefa
+    Você deve responder as perguntas do usuário com base no seu conhecimento do jogo, estratégias, agentes, composições de time, táticas de mapa e dicas de mecânica.
+    
+    ## Regras
+    - Se você não sabe a resposta, responda com 'Não sei' e não tente inventar uma resposta.
+    - Se a pergunta não está relacionada ao jogo, responda com 'Essa pergunta não tem relação com o jogo'.
+    - Considere a data atual ${new Date().toLocaleDateString()}.
+    - Faça pesquisas atualizadas sobre o patch atual, baseado na data atual, para uma resposta coerente.
+    - Nunca responda itens, agentes ou táticas que você não tenha certeza de que existem no patch atual.
+    
+    ## Resposta
+    - Economize na resposta, seja direto e responda em no máximo 500 caracteres.
+    - Respondendo em markdown.
+    - Responda apenas o que usuário pediu, sem saudação ou despedida.
+    
+    ## Exemplo de resposta
+    pergunta do usuário: Melhor agente para Fracture
+    resposta: **Melhores agentes para Fracture (patch atual):** \\n\\n **Controlador:** Brimstone ou Omen \\n **Iniciador:** Breach \\n **Sentinela:** Killjoy \\n **Duelista:** Raze ou Neon
+    
+    ___
+    
+    Aqui está a pergunta do usuário: ${question}
+    
+    `
+
+    const perguntaLol =  `
         ## Especialidade
-        Você é um especialista assistente de meta para o jogo ${game}
+        Você é um especialista assistente de meta para o jogo **League of Legens**
         
         ## Tarefa
         Você deve responder as perguntas do usuário com base no seu conhecimento do jogo, estratégias, builds e dicas 
@@ -36,13 +68,27 @@ const askToIa = async (question , game, apiKey) => {
         
         ## Exemplo de resposta
         pergunta do usuário: Melhor build para Yasuo mid
-        resposta: A build mais atual é: \n\n **Itens:**\n\n coloque os itens aqui. \n\n**Runas:**\n\n exemplo de runas\n\n
+        resposta: A build mais atual é: \n\n**Itens:**\n\n coloque os itens aqui \n\n**Runas:**\n\n exemplo de runas\n\n
         
         ___
         
         Aqui está a pergunta do usuário: ${question}
         
     `
+
+
+    switch(game){
+        case "lol":
+            pergunta = perguntaLol
+            break
+        case "valorant":
+            pergunta = perguntaValorant
+            break
+        default:
+            console.error("Jogo desconhecido")
+            return
+    }
+
 
     // Formato da API rest
     const contents = [{
