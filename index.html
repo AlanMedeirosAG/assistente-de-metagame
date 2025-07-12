@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
@@ -14,10 +18,36 @@
 
     <main>
         <section>
-            <h2>Assistente de Meta</h2>
-            <p>Pergunte sobre estratégias, builds e dicas para o seu jogo!</p>
+            <div>
+                <h2>Assistente de Meta</h2>
+                <p>Pergunte sobre estratégias, builds e dicas para o seu jogo!</p>
+
+                <form id="form">
+                    <input type="password" id="api-key" placeholder="Informe a API KEY do Gemini" required>
+
+                    <select id="game-select">
+                        <option>Selecione um jogo</option>
+                        <option value="lol">League of Legends</option>
+                        <option value="valorant">Valorant</option>
+                    </select>
+
+                    <input type="text" id="question" placeholder="Ex: Melhor build para ADC...">
+
+                    <button id="ask-button">Perguntar</button>
+
+                </form>
+                <div id="ai-response" class="hidden">
+                    <div class="response-content">
+
+                    </div>
+                </div>
+            </div>
+
         </section>
     </main>
 
+<script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+<script src="index.js"></script>
 </body>
 </html>
+

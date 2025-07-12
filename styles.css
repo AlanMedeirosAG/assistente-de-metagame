@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
     background-image: url("./assets/bg.jpg");
     background-repeat: no-repeat; /* Impede que a imagem se repita quando a pagina for maior que ela */
@@ -5,4 +11,144 @@ body{
     background-position: top center;
     background-color: #121214;
     color: white;
+}
+
+body *, :root {
+    font-family: "Inter";
+    line-height: 160%; /* Espaço entre as linhas*/
+}
+
+header{
+    padding-top: 32px;
+    text-align: center;
+}
+
+header img{
+   width: 15rem;
+}
+
+main{
+    max-width: 36rem; /* Tamanho da caixa */
+    width: 90%; /* Tamanho máximo da caixa */
+    margin: 3rem auto;
+}
+
+section{
+    background-image: linear-gradient(90deg, #9572fc 0%, #43e7AD 50%, #E2D45C 100%);
+    border-radius: 0.625rem;
+    padding-top: 4px;
+}
+
+/* O seletor ">" seleciona apenas os filhos diretos de um elemento pai, se não tivesse isso todas as divs seriam selecionadas */
+section>div{
+    padding: 1.5rem 2rem 2rem;
+    border-radius: 0.5rem;
+    background-color: #2A2634;
+
+}
+
+section h2{
+    letter-spacing: -0.47px;
+}
+
+section p{
+    letter-spacing: -0.18px;
+    color: #A1A1AA;
+}
+
+form{
+    display: flex; /* Faz todos os elementos ficarem inline(ocupam apenas o seu espaço em vez da linha toda */
+    gap: 0.85rem; /* Espaço entre os elementos em display flex */
+    flex-wrap: wrap; /* Impede que os elementos saiam do elemento pai */
+    margin: 1.25rem 0;
+}
+
+input, select{
+    all:unset; /* Tira todas as configurações default */
+    border: 2px solid #9147ff;
+    border-radius: 0.5rem;
+    padding: 0.675rem;
+    font-size: 0.875rem;
+    background-color: #000000ff; /* Esse ff no fim é a transparência da cor */
+
+}
+
+input{
+    flex: 1; /* faz o input ocupar o espaço inteiro da linha contando com o elemento que tambem esta na linha */
+}
+
+button{
+    width: 100%;
+    border: none;
+    background-image: linear-gradient(245deg, #9572fc 0%, #43e7AD 50%, #E2D45C 100%);
+    padding: 0.675rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.12px;
+
+    transition: all 0.3s; /* Faz a transação do elemento normal para o hover */
+}
+
+button:hover{
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 1rem rgba(255, 248, 107, 0.2);
+}
+
+button:disabled{
+    transition: none;
+    transform: initial; /* Faz com que o botão tenha as propriedades originais */
+    box-shadow: initial;
+    cursor: not-allowed;
+    color: black;
+}
+
+.loading{
+    animation: pulse 1s infinite; /* Faz a animação de forma infinita por 1 segundo */
+}
+
+#ai-response{
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    border-left: 4px solid #43e7AD;
+}
+
+#ai-response ul{
+    padding-left: 1.5rem;
+    opacity: 0.8;
+}
+
+#ai-response p{
+    color: white;
+}
+
+.hidden{
+    display: none;
+}
+
+/* Animações */
+
+main section{
+    opacity: 0;
+    transform: translateY(2rem);
+
+    animation-name: appear;
+    animation-duration: 700ms;
+    animation-fill-mode: forwards; /* Mantem as propriedades resultantes do final da animação */
+}
+
+@keyframes appear {
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes pulse{
+    50%{
+        opacity: 0.5;
+    }
 }
